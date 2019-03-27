@@ -22,6 +22,27 @@ export class AppComponent {
     }
   ];
 
+  _configurationsList = [
+    {
+      id: "123456789",
+      name: "Test configuration 1",
+      created: new Date(),
+      index: 0
+    },
+    {
+      id: "123456788",
+      name: "Test configuration 2",
+      created: new Date(),
+      index: 1
+    },
+    {
+      id: "123456787",
+      name: "Test configuration 3",
+      created: new Date(),
+      index: 2
+    }
+  ]
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -36,4 +57,11 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  private reorderConfigurationsList(ev) {
+    const itemToMove = this._configurationsList.splice(ev.detail.from, 1 ) [0];
+    this._configurationsList.splice(ev.detail.to, 0, itemToMove );
+    ev.detail.complete();
+  }
+
 }
